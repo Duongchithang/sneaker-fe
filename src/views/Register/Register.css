@@ -1,0 +1,63 @@
+.container-register{
+    width: 50%;
+    background: #171717;
+    display: block;
+}
+.register-account{
+    text-align: center;
+    font-size: 30px;
+    font-weight:500;
+}
+
+.around-register{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+}
+.form-register{
+    width: 450px;
+    margin: 0 auto;
+}
+.around-input-list{
+    margin-top: 10px;
+}
+.feild-input{
+    display: flex;
+    flex-direction: column;
+}
+.feild-input label{
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+.feild-input input{
+    height: 50px;
+    padding-left: 10px;
+    outline: none;
+    border: none;
+    color: black;
+}
+.around-option{
+    margin-top: 20px;
+}
+.around-option span{
+    display: block;
+    text-align: left;
+    color: red;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.Sign-in{
+    width: 130px;
+    font-weight: 500;
+    box-shadow: 0px 1px 3px 2px rgb(228, 54, 54);
+    height: 50px;
+    background: rgb(194, 16, 16);
+  }
+  .CheckValidate{
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    color: red;
+  }

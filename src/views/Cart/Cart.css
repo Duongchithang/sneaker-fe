@@ -1,0 +1,65 @@
+.btn-number-cart{
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+  }
+  
+  .min-cart{
+    border : 1px solid #ccc
+  }
+  .plus-cart{
+    border:1px solid #ccc;
+  }
+  .payment-list{
+    grid-template-columns:  3fr 1fr 1fr 1fr;
+    border-bottom: 2px solid #cccc;
+  }
+  .payment-list-item{
+    grid-template-columns: 2.5fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #cccc;
+  }
+  .button-number {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 1px 0 1px 0 #ccc;
+  }
+  .button-max {
+    border: 1px solid #ccc;
+    box-shadow: 0 0 0.2px 0.3px #ccc;
+  }
+  .btn-continue {
+    border: 3px solid #c30005;
+  }
+  .btn-update {
+    border: 3px solid #c30005;
+  }
+  .list-product-title {
+    border-bottom: 3px solid #cccc;
+  }
+  .around-payment-left {
+    border-right: 1px solid #ccc;
+  }
+  .sum-number {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+  }
+  .around-sum-phu {
+    border-bottom: 2px solid #ccc;
+  }
+  .around-ship {
+    border-bottom: 2px solid #ccc;
+  }
+  .input-discount {
+    border: 1.5px solid #ccc;
+  }
+  .around-card-discount {
+    border-bottom: 2px solid #ccc;
+  }
+  .btn-discount {
+    border: 1px solid #cccc;
+  }
+  @media screen and (max-width: 500px){
+    .payment-list{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }

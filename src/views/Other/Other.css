@@ -1,0 +1,17 @@
+.orderby{
+    padding: 5px 10px;
+    border: 1px solid black;
+  }
+  .content-price{
+    width: 150px;
+  }
+option{
+    outline: none;
+}
+.other-list li{
+     border-bottom : 1px dashed #DDDDDD;
+     margin-top: 10px;
+}
+.other-product-item{
+    border: 1px solid #DDDDDD;
+}
