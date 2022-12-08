@@ -1,8 +1,8 @@
 <template>
   <div class="content md:px-2 md:mx-10 lg:px-4 lg:mx-16 lg:mb-20">
       <div  class="around-product-type mt-16 grid gap-x-4 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
-          <div v-for="product in product_seller" :key="product" class="product-type-contain flex flex-col justify-center  items-center">
-              <div class="product-type-image xs:w-[250px]"><img class="w-full h-full object-cover" :src="product.Image_url" alt=""></div>
+          <div v-for="product in product_home_head" :key="product" class="product-type-contain flex flex-col justify-center  items-center">
+              <div class="product-type-image xs:w-[250px]"><img class="w-full h-full object-cover" :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt=""></div>
               <span class="product-type-title text-[#5c5959] pt-4 text-lg font-medium">{{product.product_name}}</span>
               <button class="product-see mt-3 w-[150px] text-[16px] font-medium py-2 text-white bg-[#C30005] rounded">Xem sản phẩm</button>
           </div>
@@ -36,11 +36,11 @@
               <swiper-slide v-for="product in product_new" :key="product">
             <div class="item-slides flex flex-col items-center">
                 <div class="around-item-image">
-                    <img class="object-bottom" :src="product.Image_url" alt="">
+                    <img class="object-bottom" :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                 </div>
                 <div class="around-item-info flex flex-col items-center">
                     <span class="item-title text-[#5c5959] pt-3  text-[16px] font-medium">{{product.product_name}}</span>
-                    <span class="item-price pt-2 text-[16px] text-[#C30005] font-medium">{{FormatPrice(product.price)}}</span>
+                    <span class="item-price pt-2 text-[16px] text-[#C30005] font-medium">{{ FormatPrice(product.product_price)}}</span>
           
                 </div>
                 <button @click="AddProduct(product)" class="text-[16px] mt-2 font-medium text-white w-[130px] py-[6px] bg-[#C30005]">Thêm vào giỏ</button>
@@ -64,11 +64,11 @@
               <swiper-slide v-for="product in product_hot" :key="product">
             <div class="item-slides flex flex-col items-center">
                 <div class="around-item-image">
-                    <img :src='product.Image_url' alt="">
+                    <img :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                 </div>
                 <div class="around-item-info flex flex-col items-center">
                     <span class="item-title text-[#5c5959] pt-3  text-[16px] font-medium">{{product.product_name}}</span>
-                    <span class="item-price pt-2 text-[16px] text-[#C30005] font-medium">{{FormatPrice(product.price)}}</span>
+                    <span class="item-price pt-2 text-[16px] text-[#C30005] font-medium">{{FormatPrice(product.product_price)}}</span>
           
                 </div>
                 <button @click="AddProduct(product)" class="text-[16px] mt-2 font-medium text-white w-[130px] py-[6px] bg-[#C30005]">Thêm vào giỏ</button>
@@ -93,11 +93,11 @@
               <swiper-slide v-for="product in product_new" :key="product">
             <div class="item-slides flex flex-col items-center">
                 <div class="around-item-image">
-                    <img :src='product.Image_url' alt="">
+                    <img :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                 </div>
                 <div class="around-item-info flex flex-col items-center">
                     <span class="item-title text-[#5c5959] pt-3  text-[16px] font-medium">{{product.product_name}}</span>
-                    <span class="item-price pt-2 text-[16px] text-[#C30005] font-medium">{{FormatPrice(product.price)}}</span>
+                    <span class="item-price pt-2 text-[16px] text-[#C30005] font-medium">{{FormatPrice(product.product_price)}}</span>
           
                 </div>
                 <button @click="AddProduct(product)" class="text-[16px] mt-2 font-medium text-white w-[130px] py-[6px] bg-[#C30005]">Thêm vào giỏ</button>
@@ -113,10 +113,10 @@
           <div class="product-other-list pt-10 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1">
               <div class="container-product-item flex flex-col items-center mt-4" v-for="product in product_other" :key="product">
                   <div class="product-other-image">
-                      <img :src='product.Image_url' alt="">
+                      <img :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                   </div>
                   <span class="product-other-title text-[#334862] mt-2">{{product.product_name}}</span>
-                  <span class="product-other-price text-[#C30005] mt-1">{{FormatPrice(product.price)}}</span>
+                  <span class="product-other-price text-[#C30005] mt-1">{{FormatPrice(product.product_price)}}</span>
                   <button @click="AddProduct(product)" class="add-product-other py-2 text-white font-medium text-[14px] mt-2 w-[120px] bg-[#C30005]">Thêm sản phẩm</button>
               </div>
           </div>
@@ -137,12 +137,12 @@
                   <div class="container-shoes-discount flex-col items-center justify-center grid lg:grid-cols-4 md:grid-cols-2 gap-x-[20px]">
                       <div class="shoes-item relative mt-9" v-for="product in product_discount" :key="product">
                           <div class="shoes-item-img xs:w-[300px]">
-                              <img :src='product.Image_url' alt="">
+                              <img :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                           </div>
                           <h2 class="shoes-title text-[#5c5959] font-medium text-[16px] mt-2">{{product.product_name}}</h2>
                           <div class="around-shoes-price mt-2">
-                              <span class="remove-price pr-5 font-medium line-through text-[#b1262a] text-[16px]">{{FormatPrice(product.price)}}</span>
-                              <span class="current-price text-[16px] text-[#C30005] font-medium">{{ProductDiscount(product.price)}}</span>
+                              <span class="remove-price pr-5 font-medium line-through text-[#b1262a] text-[16px]">{{FormatPrice(product.product_price)}}</span>
+                              <span class="current-price text-[16px] text-[#C30005] font-medium">{{ProductDiscount(product.product_price)}}</span>
                           </div>
                           <span class="item-discount py-[14px] font-medium text-[16px] text-white px-[9px] rounded-full absolute top-[20px] left-0 bg-[#C30005]">-30%</span>
                           <button @click="AddProduct(product)" class="add-product-discount mt-3 w-[130px] py-2 text-white font-medium text-[16px] bg-[#C30005]">Thêm sản phẩm</button>
@@ -171,8 +171,9 @@ export default {
         return{
         currentTab: 1,
         check: true,
+            HostUrl: "http://localhost:1337",
         //Xử lí data api
-        product_seller:[],
+        product_home_head:[],
         product_new : [],
         product_hot: [],
         product_other :[],
@@ -208,20 +209,27 @@ export default {
 
     },
    async created(){
-       const reponse = await ProductApi.GetAllProductApi(`http://localhost:5000/v1/product`);
-       this.product_seller = reponse.data.product_seller;
-       this.product_new = reponse.data.product_new;
-       this.product_hot = reponse.data.product_hot;
-       this.product_other = reponse.data.product_other;
-       this.product_discount = reponse.data.product_discount;
+       const reponse = await ProductApi.GetAllProductApi(`http://localhost:1337/api/products?populate=product_image&pagination[pageSize]=50`);
+       console.log(reponse.data.data);
+       for(var i = 0; i < reponse.data.data.length;i++){
+
+         (reponse.data.data[i].attributes.product_zone == "HomeHead") ? this.product_home_head.push(reponse.data.data[i].attributes) : null;
+           (reponse.data.data[i].attributes.product_zone == "ProductNew") ? this.product_new.push(reponse.data.data[i].attributes) : null;
+           (reponse.data.data[i].attributes.product_zone == "ProductHot") ? this.product_hot.push(reponse.data.data[i].attributes) : null;
+           (reponse.data.data[i].attributes.product_zone == "ProductOther") ? this.product_other.push(reponse.data.data[i].attributes) : null;
+           (reponse.data.data[i].attributes.product_zone == "HomeDiscount") ? this.product_discount.push(reponse.data.data[i].attributes) : null;
+        
+       }
+       
+  
     },
     methods: {
         ...mapMutations(['AddProduct']),
         onChangeTabs(tab){
           this.currentTab = tab 
         },
-        FormatPrice(price){
-            return price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+        FormatPrice(price) {
+            return price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
         },
         ProductDiscount(price){
         let PriceDiscount = price * Number.parseFloat(70/100).toFixed(1);

@@ -61,11 +61,11 @@
         <div class="other-right">
             <div class="other-product-around lg:mt-[40px] lg:ml-[20px]">
                 <div class="other-product-list grid lg:grid-cols-4 xs:grid-cols-1 xs:grid-rows-6 xs:gap-y-[20px] md:grid-cols-2 md:grid-rows-3 md:gap-x-[20px] md:gap-y-[20px] lg:gap-y-[20px] lg:gap-x-[20px] lg:grid-rows-2">
-                    <div v-for="product in product_data" :key="product" class="other-product-item pb-[10px]">
-                        <img class="h-[200px] object-cover" :src="product.Image_url" alt="">
+                    <div v-for="product in product_kid" :key="product" class="other-product-item pb-[10px]">
+                        <img class="h-[200px] object-cover" :src="`${HostUrl}${product.attributes.product_image.data.attributes.url}`" alt="">
                         <div class="around-content-item flex flex-col">
-                             <span class="name-product text-[14px] text-[#666]">{{product.product_name}}</span>
-                             <span class="mt-[10px] text-[15px] font-medium text-black">{{FormatPrice(product.price)}}</span>
+                             <span class="name-product text-[14px] text-[#666]">{{product.attributes.product_name}}</span>
+                             <span class="mt-[10px] text-[15px] font-medium text-black">{{ product.attributes.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span>
                         </div>
                         <button @click="AddProduct(product)" class="mt-[8px] w-[110px] h-[30px] text-[12px] font-medium text-white bg-[#C30005]">THÊM VÀO GIỎ</button>
                     </div>         
@@ -89,7 +89,8 @@ export default{
   data(){
     return{
       OptionValue : ['Thứ tự mặc định', 'thấp đến cao', 'cao đến thấp'],
-      product_data : []
+      product_kid : [],
+      HostUrl: "http://localhost:1337"
     }
   },
   components: {
@@ -98,29 +99,33 @@ export default{
     Loader
   },
  async created(){
-   await axios.get(`http://localhost:5000/v1/product/children`).then((res)=>{
-      this.product_data = res.data.product_children;
+   await axios.get(`http://localhost:1337/api/products?populate=product_image&pagination[pageSize]=50`).then((res)=>{
+    const ArrayProductKid = res.data.data;
+      ArrayProductKid.forEach(element => {
+        if(element.attributes.product_zone == "ProductKid"){
+          this.product_kid.push(element);
+        }
+      });
     });  
-    console.log(this.product_data);  
   },
   computed:{
   },
   methods:{
     ...mapMutations(['AddProduct']),
-    FormatPrice(price){
-     return price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-    },
+   
    ChangeOption(event){
     const valueOption = event.target.value;
+    console.log(valueOption);
+    console.log(this.product_kid);
      switch (valueOption) {
       case 'thấp đến cao':
-        this.product_data.sort(function(a,b){
-          return a.price - b.price
+        this.product_kid.sort(function(a,b){
+          return a.attributes.product_price - b.attributes.product_price;
         })
         break;
       case 'cao đến thấp':
-        this.product_data.sort(function(a,b){
-          return b.price - a.price;
+        this.product_kid.sort(function(a,b){
+          return b.attributes.product_price - a.attributes.product_price;
         })
       default:
         break;
@@ -161,5 +166,7 @@ option{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 </style>

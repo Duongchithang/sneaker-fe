@@ -59,7 +59,7 @@
           </div>
           <div class="header-cart flex items-center ml-5 relative cursor-pointer">
             <span class="text-cart text-sm font-semibold md:hidden lg:block xs:hidden sm:hidden"
-              >GIỎ HÀNG / {{ FormatPrice(TotalProduct) }}</span
+              >GIỎ HÀNG / {{ TotalProduct.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span
             >
             <div class="container-cart">
               <i class="fa-solid icon-cart-shopping fa-cart-shopping xs:mr-[20px] md:mr-0 ml-3 md:text-[25px] xs:text-[25px]"></i>
@@ -90,19 +90,19 @@
               <div class="cart-around-item max-h-[300px] overflow-y-scroll">
                 <div class="cart-item flex justify-between pb-[5px] mt-3" v-for="(product,index) in ArrayTotalProduct" :key="(product,index)">
                   <div class="cart-item-image w-[100px] h-[80px]">
-                    <img class="w-full h-full object-cover" :src="product.Image_url" alt="">
+                    <img class="w-full h-full object-cover" :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                   </div>
                   <div class="cart-content-text flex flex-col  w-[100px]">
                     <span class="cart-title text-[15px] flex-wrap text-left">{{product.product_name}}</span>
-                    <span class="cart-price text-[15px] text-left">1 x {{FormatPrice(product.price)}}</span>
+                    <span class="cart-price text-[15px] text-left">1 x {{ product.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span>
                   </div>
                   <div  class="around-icon w-[20px] pr-[8px]">
-                    <i @click="RemoveProduct({index,product:product.price})" class="close-add fa-solid fa-xmark text-[16px] cursor-pointer"></i>
+                    <i @click="RemoveProduct({index,product})" class="close-add fa-solid fa-xmark text-[16px] cursor-pointer"></i>
                   </div>
                 </div>
               </div>
               <div class="around-total flex justify-center items-center pt-3 pb-3 text-[18px] font-bold">
-                <h1 class="total pr-2">Tổng phụ : {{FormatPrice(TotalProduct)}}</h1>
+                <h1 class="total pr-2">Tổng phụ : {{ TotalProduct.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</h1>
                 <span class="number-total">{{}}</span>
               </div>
               <div class="around-btn-cart flex flex-col mt-3 text-white">
@@ -238,11 +238,11 @@
               <div class="around-repons-product-list xs:mt-[20px] md:mt-[60px] flex flex-col">
                    <div class="repons-product-item flex pb-[20px] mt-[20px]" v-for="(product,index) in ArrayTotalProduct" :key="(product,index)">
                      <div class="repons-product-img xs:w-[120px] md:w-[150px] mr-4">
-                       <img class="w-full h-full object-cover" :src="product.Image_url" alt="">
+                       <img class="w-full h-full object-cover" :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
                      </div>
                      <div class="repons-product-info md:w-[130px] flex flex-col justify-center">
                        <span class="repons-product-title flex-wrap text-left xs:text-[14px] md:text-[18px] font-medium">{{product.product_name}}</span>
-                       <span class="repons-product-price text-left mt-[5px] xs:text-[14px] md:text-[18px] font-medium text-[#7F7F7F]">1 x {{FormatPrice(product.price)}}</span>
+                       <span class="repons-product-price text-left mt-[5px] xs:text-[14px] md:text-[18px] font-medium text-[#7F7F7F]">1 x {{product.price}}</span>
                      </div>
                      <i  class="close-repons fa-solid fa-circle-xmark ] md:w-[30px] text-[25px] font-medium text-[#7F7F7F]"></i>
                    </div>
@@ -272,17 +272,16 @@ import { mapMutations, mapState } from 'vuex';
 export default {
   data() {
     return {
-     
+      HostUrl: "http://localhost:1337",
     };
   },
   computed:{
     ...mapState(['TotalProduct','ArrayTotalProduct','CountProduct','ArrayMenu','ArrayMenuLink']),
+   
   },
   methods:{
    ...mapMutations(['OnTotalProduct','RemoveProduct']),
-   FormatPrice(price){
-      return price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-     }
+   
   },
   mounted() {
     var CloseCart = document.querySelector('.close-cart-shop');

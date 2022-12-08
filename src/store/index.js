@@ -11,18 +11,20 @@ export default createStore({
   },
   mutations: {
     AddProduct(state,product){
+      
       state.ArrayTotalProduct.push(product);
-      state.CountProduct++;
+      state.CountProduct++;  
+     state.TotalProduct = state.ArrayTotalProduct.reduce((total,currentValue)=>{
+        return total + currentValue.product_price;
+      },0);
       console.log(state.ArrayTotalProduct);
-      return state.TotalProduct = state.ArrayTotalProduct.reduce((total,currentValue)=>{
-        return total + currentValue.price
-      },0)
     },
+     
     RemoveProduct(state,value){
       state.ArrayTotalProduct.splice(value.index,1);
       state.CountProduct--;
       console.log(state.ArrayTotalProduct);
-       state.TotalProduct = state.TotalProduct - value.product;
+       state.TotalProduct = state.TotalProduct - value.product.product_price;
        return state.TotalProduct;
     }
   },
