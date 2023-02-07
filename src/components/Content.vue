@@ -166,6 +166,8 @@ import { Pagination, Navigation } from "swiper";
 
 import ProductApi from '../Service/product_api'
 import { mapMutations } from 'vuex';
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css'
 export default {
     data(){
         return{

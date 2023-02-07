@@ -67,7 +67,7 @@
                              <span class="name-product text-[14px] text-[#666]">{{product.attributes.product_name}}</span>
                              <span class="mt-[10px] text-[15px] font-medium text-black">{{ product.attributes.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span>
                         </div>
-                        <button @click="AddProduct(product)" class="mt-[8px] w-[110px] h-[30px] text-[12px] font-medium text-white bg-[#C30005]">THÊM VÀO GIỎ</button>
+                        <button @click="AddProduct(product.attributes)" class="mt-[8px] w-[110px] h-[30px] text-[12px] font-medium text-white bg-[#C30005]">THÊM VÀO GIỎ</button>
                     </div>         
                 </div>
             </div>
@@ -115,8 +115,7 @@ export default{
    
    ChangeOption(event){
     const valueOption = event.target.value;
-    console.log(valueOption);
-    console.log(this.product_kid);
+    
      switch (valueOption) {
       case 'thấp đến cao':
         this.product_kid.sort(function(a,b){

@@ -31,7 +31,8 @@
 </template>
 
 <script>
-
+import { createToast } from 'mosha-vue-toastify';
+import 'mosha-vue-toastify/dist/style.css';
 export default {
    data(){
     return{
@@ -74,7 +75,16 @@ export default {
      if(this.CheckInputSuccess.Password != this.CheckInputSuccess.ConfirmPassword){
         this.CheckInputError.ConfirmPassword = 'Incorrect password'
      }
+     if(this.CheckInputError.Username == "" && this.CheckInputError.Password == "" && this.CheckInputError.ConfirmPassword == ""){
+       this.ToastCheckRegisterSuccess();
+     }
     },
+    ToastCheckRegisterSuccess(){
+      createToast("Bạn đã đăng kí thành công",{
+         type : 'success'
+      })
+    }
+    ,
     CreateAccount(){
       this.Validate();
     }

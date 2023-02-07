@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-
+import 'mosha-vue-toastify/dist/style.css';
+import { createToast } from 'mosha-vue-toastify';
 export default createStore({
   state: {
    ArrayTotalProduct : [],
@@ -11,7 +12,10 @@ export default createStore({
   },
   mutations: {
     AddProduct(state,product){
-      
+      console.log(product);
+      createToast('Đã Thêm Sản Phẩm Vào Giỏ Hàng',{
+        type : 'success'
+      })
       state.ArrayTotalProduct.push(product);
       state.CountProduct++;  
      state.TotalProduct = state.ArrayTotalProduct.reduce((total,currentValue)=>{

@@ -23,7 +23,7 @@
           </form>
         </div>
       </div>
-      <div class="container-other flex xs:justify-center xs:mt-[50px] xs:mb-[50px]  lg:mt-[50px] lg:mb-[50px]">
+      <div class="container-other flex xs:justify-center lg:justify-between xs:mt-[50px] xs:mb-[50px]  lg:mt-[50px] lg:mb-[50px]">
         <div class="other-left xs:hidden lg:block lg:w-[25%]">
             <h1 class="text-[18px] font-medium text-[#353535] text-left">SẢN PHẨM</h1>
             <ul class="other-list flex flex-col lg:mt-[20px] lg:px-[8px] lg:py-[12px] bg-[#FCFCFC] border-[1.5px] border-[#DDDDDD]">
@@ -68,12 +68,12 @@
             <div class="other-product-around lg:mt-[40px] lg:ml-[20px]">
                 <div class="other-product-list grid lg:grid-cols-4 xs:grid-cols-1 xs:grid-rows-6 xs:gap-y-[20px] md:grid-cols-2 md:grid-rows-3 md:gap-x-[20px] md:gap-y-[20px] lg:gap-y-[20px] lg:gap-x-[20px] lg:grid-rows-2">
                     <div class="other-product-item pb-[10px]" v-for="product in product_other" :key="product">
-                        <img   class="h-[200px] object-cover" :src='product.Image_url' alt="">
+                        <img   class="h-[200px] object-cover" :src="`${HostUrl}${product.attributes.product_image.data.attributes.url}`" alt="">
                         <div class="around-content-item flex flex-col">
-                             <span class="text-[14px] text-[#666]">{{product.product_name}}</span>
-                             <span class="mt-[10px] text-[15px] font-medium text-black">{{FormatPrice(product.price)}}</span>
+                             <span class="text-[14px] text-[#666]">{{product.attributes.product_name}}</span>
+                             <span class="mt-[10px] text-[15px] font-medium text-black">{{product.attributes.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span>
                         </div>
-                        <button @click="AddProduct(product)" class="mt-[8px] w-[110px] h-[30px] text-[12px] font-medium text-white bg-[#C30005]">THÊM VÀO GIỎ</button>
+                        <button @click="AddProduct(product.attributes)" class="mt-[8px] w-[110px] h-[30px] text-[12px] font-medium text-white bg-[#C30005]">THÊM VÀO GIỎ</button>
                     </div>                      
                 </div>
             </div>
@@ -99,33 +99,39 @@ export default {
   },
   data(){
      return{
-      product_other:[]
+      product_other:[],
+      HostUrl: "http://localhost:1337"
      }
   },
   computed:{
      ...mapState(['ProductOther'])
   },
  async created(){
-     const reponse = await ProductApi.GetAllProductApi(`http://localhost:5000/v1/product`);
-     this.product_other = reponse.data.product_other;
+   const reponse = await ProductApi.GetAllProductApi(`http://localhost:1337/api/products?populate=product_image&pagination[pageSize]=50`);
+   
+   for(var i = 0; i < reponse.data.data.length; i++){
+    if(reponse.data.data[i].attributes.product_zone == "ProductOther"){
+      this.product_other.push(reponse.data.data[i]);
+    }
+   };
+   console.log(this.product_other);
   },
 
    methods:{
     ...mapMutations(['AddProduct']),
-    FormatPrice(price){
-      return price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-    },
+    
     OnchangeOption(event){
      let value = event.target.value;
+     console.log(value);
      switch (value) {
       case `từ thấp đến cao`:
         this.product_other.sort(function(a,b){
-          return a.price - b.price;
+          return a.attributes.product_price - b.attributes.product_price;
         })
         break;
       case `từ cao xuống thấp`:
         this.product_other.sort(function(a,b){
-          return b.price - a.price;
+          return b.attributes.product_price - a.attributes.product_price;
         })
       default:
         break;
