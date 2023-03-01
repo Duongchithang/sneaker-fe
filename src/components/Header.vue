@@ -2,9 +2,35 @@
   <div class="header">
     <div class="container-header bg-black text-white ">
       <div class="lg:px-4 lg:ml-16 lg:mr-16 md:px-3 md:ml-10 md:mr-10 xs:px-1 xs:mr-2 xs:ml-2 relative flex justify-between items-center">
-        <span class="md:hidden lg:block xs:hidden sm:hidden absolute top-[50%] translate-y-[-50%] left-0">
+        <span v-if="Avartar.length == 0" class="md:hidden lg:block xs:hidden sm:hidden absolute top-[50%] translate-y-[-50%] left-0">
           <router-link to="/login" class="text-sm font-semibold">ĐĂNG NHẬP / ĐĂNG KÍ</router-link>
         </span>
+        <div class="absolute top-[50%] translate-y-[-50%] left-0" style="width: 70px; height: 60px;" v-if="Avartar.length != 0">
+         
+         <v-menu style="width:100%; height: 100%;">
+        <template 
+       
+         v-slot:activator="{ props }">
+          <div style="width:100%; height: 100%;">
+            <img v-bind="props" style="width: 100%; height: 100%; object-fit: cover; border-radius: 80%;" :src="Avartar"/>
+          </div>
+        </template>
+        <v-list>
+          <v-list-item
+         
+            v-for="(item, index) in items"
+            :key="index"
+            :value="index"
+          >
+            <v-list-item-title   @click="(event) => {
+              ChooseOptions(item.title)
+            }">{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+             
+         
+        </div>
         <i
           class="
             fa-solid
@@ -90,7 +116,7 @@
               <div class="cart-around-item max-h-[300px] overflow-y-scroll">
                 <div class="cart-item flex justify-between pb-[5px] mt-3" v-for="(product,index) in ArrayTotalProduct" :key="(product,index)">
                   <div class="cart-item-image w-[100px] h-[80px]">
-                    <img class="w-full h-full object-cover" :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
+                    <img class="w-full h-full object-cover" :src="`${product.product_image.data.attributes.url}`" alt="">
                   </div>
                   <div class="cart-content-text flex flex-col  w-[100px]">
                     <span class="cart-title text-[15px] flex-wrap text-left">{{product.product_name}}</span>
@@ -106,7 +132,7 @@
                 <span class="number-total">{{}}</span>
               </div>
               <div class="around-btn-cart flex flex-col mt-3 text-white">
-                <router-link to="/cart"><button  class="see-cart-btn w-full h-[40px] hover:bg-[#d82f34] bg-[#C30005] font-bold">XEM GIỎ HÀNG</button></router-link>
+                <router-link to="/cart"><button  class="see-cart-btn w-full h-[40px] hover:bg-[#d82f34] hover:text-white bg-[#C30005] font-bold">XEM GIỎ HÀNG</button></router-link>
                  <button class="btn-payment w-[full] h-[40px] bg-[#8d282b] mt-2 font-bold">THANH TOÁN</button>
               </div>
             </div>
@@ -160,7 +186,7 @@
             <router-link to="/intro">GIỚI THIỆU</router-link>
           </li>
           <li class="menu-item py-4 border-t border-[#c2bebe]">
-            <router-link to="">NỮ</router-link>
+            <router-link to="/women">NỮ</router-link>
           </li>
           <li class="menu-item py-4 border-t border-[#c2bebe]">
             <router-link to="">NAM</router-link>
@@ -210,7 +236,7 @@
           <router-link to="/intro">GIỚI THIỆU</router-link>
         </li>
         <li class="menu-items">
-          <router-link to="">NỮ</router-link>
+          <router-link to="/women">NỮ</router-link>
         </li>
         <li class="menu-items">
           <router-link to="">NAM</router-link>
@@ -238,7 +264,7 @@
               <div class="around-repons-product-list xs:mt-[20px] md:mt-[60px] flex flex-col">
                    <div class="repons-product-item flex pb-[20px] mt-[20px]" v-for="(product,index) in ArrayTotalProduct" :key="(product,index)">
                      <div class="repons-product-img xs:w-[120px] md:w-[150px] mr-4">
-                       <img class="w-full h-full object-cover" :src="`${HostUrl}${product.product_image.data.attributes.url}`" alt="">
+                       <img class="w-full h-full object-cover" :src="`${product.product_image.data.attributes.url}`" alt="">
                      </div>
                      <div class="repons-product-info md:w-[130px] flex flex-col justify-center">
                        <span class="repons-product-title flex-wrap text-left xs:text-[14px] md:text-[18px] font-medium">{{product.product_name}}</span>
@@ -268,12 +294,24 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapMutations, mapState } from 'vuex';
+import { URL_BACKEND } from '../variable_enviroment';
 export default {
   data() {
     return {
       HostUrl: "http://localhost:1337",
+      Avartar : '',
+      items: [
+        { title: 'Đăng xuất' },
+        { title: 'Tài khoản' },
+        { title: 'Giỏ Hàng' } 
+      ],
     };
+  },
+  created(){
+     this.HandleImageLoginUser();
+    
   },
   computed:{
     ...mapState(['TotalProduct','ArrayTotalProduct','CountProduct','ArrayMenu','ArrayMenuLink']),
@@ -281,7 +319,23 @@ export default {
   },
   methods:{
    ...mapMutations(['OnTotalProduct','RemoveProduct']),
-   
+   FindUser(user_id){
+    return axios.get(`${URL_BACKEND}/api/users/${user_id}?populate=*`);
+   },
+  async HandleImageLoginUser(){
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      const user = await this.FindUser(userData.id);
+      this.Avartar = user.data.avartar.url;
+   },
+   ChooseOptions(value){
+     if(value == "Đăng xuất"){
+      window.localStorage.removeItem('userData');
+      location.reload();
+     }
+     else if(value == "Tài khoản"){
+      this.$router.push({ path: '/profile' });
+     }
+   }
   },
   mounted() {
     var CloseCart = document.querySelector('.close-cart-shop');
@@ -297,6 +351,7 @@ export default {
     var Cart = document.querySelector('.around-cart-product');
     var Scroll = document.querySelector('.cart-list');
     var check = true;
+    
     
     IconCart.addEventListener('click', function(){
      CartAroundPayment.style.transform = 'translateX(0)'

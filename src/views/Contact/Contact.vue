@@ -6,7 +6,7 @@
         <div class="container-banner-img w-full h-full">
           <img
             class="w-full h-full object-cover"
-            src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/banner-1.jpg  "
+            :src="ImageBanner"
             alt=""
           />
         </div>
@@ -271,6 +271,8 @@ import Footer from "../../components/Footer.vue";
 import Loader from "../../components/Loader.vue";
 import { createToast } from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css';
+import { URL_BACKEND } from '../../variable_enviroment';
+import axios from 'axios';
 export default {
   components: {
     Header,
@@ -279,6 +281,7 @@ export default {
   },
   data() {
     return {
+      ImageBanner: '',
       CheckInput: {
         InputName: "",
         InputEmail: "",
@@ -298,9 +301,20 @@ export default {
   computed:{
       
   },
+  created(){
+     this.CallApiBanner();
+  },
   methods: {
       isValidPhone (phone) {
           return /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/.test(phone);
+      },
+     async CallApiBanner(){
+         const data = await axios.get(`${URL_BACKEND}/api/test-dinaries?populate=*`);
+      const data_image = data.data.data.filter((value, index) => {
+        return value.attributes.banner_id == "banner_01";
+      });
+      this.ImageBanner = data_image[0].attributes.media.data.attributes.url;
+      console.log(this.ImageBanner);
       },
     Validate() {
       this.Error = {

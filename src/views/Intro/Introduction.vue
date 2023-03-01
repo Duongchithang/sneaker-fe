@@ -4,7 +4,7 @@
      <div class="container-intro ">
          <div class="intro-banner relative w-full h-[200px]">
              <div class="container-banner-img w-full h-full">
-                 <img class="w-full h-full object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/banner-1.jpg  " alt="">
+                 <img class="w-full h-full object-cover" :src="ImageBanner1" alt="">
              </div>
              <div class="container-banner-content absolute top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%]">
                  <h1 class="heading-intro xs:text-[20px] md:text-[30px] text-white font-medium">GIỚI THIỆU</h1>
@@ -14,10 +14,10 @@
                  </div>
              </div>
          </div>
-         <div class="container-info-content mt-[60px] lg:px-4 lg:ml-16 lg:mr-16 md:px-3 md:ml-10 md:mr-10 xs:px-1 xs:mr-2 xs:ml-2">
+         <div class="container mt-5">
              <div class="container-info-top  lg:flex lg:w-[100%] md:w-[100%]  lg:justify-between">
                  <div class="around-image-info md:w-[300px] md:flex mx-auto md:h-[400px] lg:w-[380px] lg:h-[450px]">
-                     <img class="w-full h-full object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/03306320213d3356ce875921ff197762.jpg" alt="">
+                     <img class="w-full h-full object-cover" :src="ImageBanner2" alt="">
                  </div>
                  <div class="around-info-text lg:w-[60%] md:w-[100%]">
                      <div class="info-text-top flex flex-col">
@@ -90,11 +90,36 @@
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
 import Loader from '../../components/Loader.vue';
+import axios from 'axios';
+import { URL_BACKEND } from '../../variable_enviroment';
 export default {
+    data(){
+        return {
+            ImageBanner1 : '',
+            ImageBanner2: ''
+        }
+    },
    components:{
        Header,
        Footer,
        Loader
+   },
+   created(){
+   this.CallApiBanner();
+   },
+   methods:{
+        async CallApiBanner() {
+            const data = await axios.get(`${URL_BACKEND}/api/test-dinaries?populate=*`);
+            const data_image1 = data.data.data.filter((value, index) => {
+                return value.attributes.banner_id == "banner_01";
+            });
+             const data_image2 = data.data.data.filter((value, index) => {
+                return value.attributes.banner_id == "banner_02";
+            });
+            this.ImageBanner1 = data_image1[0].attributes.media.data.attributes.url;
+            this.ImageBanner2 = data_image2[0].attributes.media.data.attributes.url;
+            console.log(this.ImageBanner);
+        },
    },
    mounted(){
     var load = document.querySelector('.load');

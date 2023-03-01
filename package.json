@@ -14,12 +14,14 @@
     "axios": "^0.27.2",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
+    "element-plus": "^2.2.32",
     "mosha-vue-toastify": "^1.0.23",
     "swiper": "^8.1.4",
     "tw-elements": "^1.0.0-alpha12",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuelidate": "^0.7.7",
+    "vuetify": "^3.1.7",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

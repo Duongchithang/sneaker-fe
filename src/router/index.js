@@ -9,6 +9,9 @@ import Other from  '../views/Other/Other.vue'
 import Children from '../views/Children/Children.vue'
 import ProductDetail from '../views/ProductDetail/ProductDetail.vue'
 import Admin from '../views/Admin.vue'
+import Women from '../views/Women/Women.vue';
+import BlogDetail from '../views/BlogDetail/BlogDetail.vue';
+import Profile from '../views/Profile/Profile.vue';
 const routes = [
   {
     path: '/',
@@ -64,7 +67,21 @@ const routes = [
   name :'Admin',
   component: Admin
 },
-
+{
+  path : '/women',
+  name :'Women',
+  component: Women
+},
+{
+  path : '/blog-detail/:id',
+  name :'Blogdetail',
+  component: BlogDetail
+},
+{
+  path : '/profile',
+  name :'Profile',
+  component: Profile
+},
 ]
 
 const router = createRouter({
@@ -72,4 +89,4 @@ const router = createRouter({
   routes
 })
 
-export default router
+export default router;

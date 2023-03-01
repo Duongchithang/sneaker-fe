@@ -70,9 +70,12 @@
 </template>
 
 <script>
+import { identifier } from '@babel/types'
+import axios from 'axios'
 import Header from '../../components/Header.vue'
 import Register from '../Register/Register.vue'
-
+import ImageUser from '../../../public/user_image.png'
+import { URL_BACKEND } from '@/variable_enviroment'
 export default {
    components:{
     Header,
@@ -112,8 +115,40 @@ export default {
             this.Error.InputPassword = 'Password is required'
         }
     },
-     Login(e){
+    GetAllUsers(){
+        const users = fetch(`${URL_BACKEND}/api/auth/local?populate=*`,{
+            method : 'POST',
+            headers : {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                identifier : this.CheckInput.InputUsername,
+                password : this.CheckInput.InputPassword
+            })
+        }).then((res)=>{
+            return res.json();
+        }).then((data)=>{
+            return data;
+        });
+        return users;
+    },
+    async Login(e){
         this.Validate();
+        if(this.Error.InputUsername == '' && this.Error.InputPassword == ''){
+            let data = await this.GetAllUsers();
+            const { jwt, user } = data;
+            window.localStorage.setItem('jwt', jwt)
+            window.localStorage.setItem('userData', JSON.stringify(user));
+            if(data.user){
+                alert('Đăng nhập thành công');
+                setTimeout(()=>{
+                     this.$router.push({path : '/'});
+                },1000)
+            }
+           if(!data.data){
+            alert("Tài khoản hoặc mật khẩu không chính xác vui lòng nhập lại ....");
+           }
+        }
      }
      // Check validate input
    },

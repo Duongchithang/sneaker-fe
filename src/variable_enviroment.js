@@ -1,0 +1,1 @@
+export let URL_BACKEND = `https://sneaker-be-production.up.railway.app`;

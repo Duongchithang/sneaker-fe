@@ -2,7 +2,7 @@
   <div class="Other">
     <Header class="Other-Header"/>
     <div class="around-other lg:ml-16 lg:mr-16  md:ml-10 md:mr-10  xs:mr-2 xs:ml-2">
-      <div class="around-other-option lg:mt-[25px] xs:mt-[25px] xs:flex-col flex lg:flex-row justify-between">
+      <div class="container lg:mt-[25px] xs:mt-[25px] xs:flex-col flex lg:flex-row justify-between">
         <div class="container-router-other xs:text-[14px] lg:text-[18px] text-[#949494]">
           <router-link to="/" class="text-[#949494]">TRANG CHỦ</router-link> /
           <router-link to="" class="font-medium text-black">PHỤ KIỆN KHÁC</router-link>
@@ -23,52 +23,25 @@
           </form>
         </div>
       </div>
-      <div class="container-other flex xs:justify-center lg:justify-between xs:mt-[50px] xs:mb-[50px]  lg:mt-[50px] lg:mb-[50px]">
+      <div class="container flex xs:justify-center lg:justify-between xs:mt-[50px] xs:mb-[50px]  lg:mt-[50px] lg:mb-[50px]">
         <div class="other-left xs:hidden lg:block lg:w-[25%]">
             <h1 class="text-[18px] font-medium text-[#353535] text-left">SẢN PHẨM</h1>
-            <ul class="other-list flex flex-col lg:mt-[20px] lg:px-[8px] lg:py-[12px] bg-[#FCFCFC] border-[1.5px] border-[#DDDDDD]">
-                <li class="flex pb-[10px]">
-                    <img class="lg:w-[60px] lg:h-[60px] object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/men-psy-1-100x100.jpg" alt="">
-                    <div class="content-price flex flex-col justify-between ml-[10px]">
-                        <span class="text-[14px] text-[#666]">Chuck 70 Psy-Kicks Ox</span>
-                        <span class="text-[16px] text-black font-medium">2,800,000 đ</span>
-                    </div>
-                </li>
-                <li class="flex pb-[10px]">
-                    <img class="lg:w-[60px] lg:h-[60px] object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/women-psy-2-150x150.jpg" alt="">
-                    <div class="content-price flex flex-col justify-between ml-[10px]">
-                        <span class="text-[14px] text-[#666]">Chuck 70 Psy-Kicks Ox</span>
-                        <span class="text-[16px] text-black font-medium">1,800,000 đ</span>
-                    </div>
-                </li>
-                <li class="flex pb-[10px]">
-                    <img class="lg:w-[60px] lg:h-[60px] object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/women-sunbaked-1-150x150.jpg" alt="">
-                    <div class="content-price flex flex-col justify-between ml-[10px]">
-                        <span class="text-[14px] text-[#666]">One Star Sunbaked</span>
-                        <span class="text-[16px] text-black font-medium">1,600,000 đ</span>
-                    </div>
-                </li>
-                <li class="flex pb-[10px]">
-                    <img class="lg:w-[60px] lg:h-[60px] object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/women-sunbaked-2-100x100.jpg" alt="">
-                    <div class="content-price flex flex-col justify-between ml-[10px]">
-                        <span class="text-[14px] text-[#666]">One star Sunbaked</span>
-                        <span class="text-[16px] text-black font-medium">1.600,000 đ</span>
-                    </div>
-                </li>
-                <li class="flex pb-[10px]">
-                    <img class="lg:w-[60px] lg:h-[60px] object-cover" src="http://mauweb.monamedia.net/converse/wp-content/uploads/2019/05/women-sunbaked-3-100x100.jpg" alt="">
-                    <div class="content-price flex flex-col justify-between ml-[10px]">
-                        <span class="text-[14px] text-[#666]">One Star Sunbaked</span>
-                        <span class="text-[16px] text-black font-medium">1,600,000 đ</span>
-                    </div>
-                </li>
-            </ul>
+           <ul class="other-list flex flex-col lg:mt-[20px] lg:px-[8px] lg:py-[12px] bg-[#FCFCFC] border-[1.5px] border-[#DDDDDD]">
+                  <li v-for="(product,index) in product_suggest" :key="index"  class="flex pb-[10px] justify-around">
+                      <img class="lg:w-[60px] lg:h-[60px] object-cover" :src="`${product.attributes.product_image.data.attributes.url}`" alt="">
+                      <div class="content-price flex flex-col justify-between ml-[10px]">
+                          <span class="text-[14px] text-[#666]">{{ product.attributes.product_name }}</span>
+                          <span class="text-[16px] text-black font-medium">{{ product.attributes.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span>
+                      </div>
+                  </li>
+                
+              </ul>
         </div>
         <div class="other-right">
             <div class="other-product-around lg:mt-[40px] lg:ml-[20px]">
                 <div class="other-product-list grid lg:grid-cols-4 xs:grid-cols-1 xs:grid-rows-6 xs:gap-y-[20px] md:grid-cols-2 md:grid-rows-3 md:gap-x-[20px] md:gap-y-[20px] lg:gap-y-[20px] lg:gap-x-[20px] lg:grid-rows-2">
                     <div class="other-product-item pb-[10px]" v-for="product in product_other" :key="product">
-                        <img   class="h-[200px] object-cover" :src="`${HostUrl}${product.attributes.product_image.data.attributes.url}`" alt="">
+                        <img   class="h-[200px] object-cover" :src="`${product.attributes.product_image.data.attributes.formats.thumbnail.url}`" alt="">
                         <div class="around-content-item flex flex-col">
                              <span class="text-[14px] text-[#666]">{{product.attributes.product_name}}</span>
                              <span class="mt-[10px] text-[15px] font-medium text-black">{{product.attributes.product_price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) }}</span>
@@ -91,6 +64,7 @@ import Footer from "../../components/Footer.vue";
 import Loader from '../../components/Loader.vue'
 import { mapMutations, mapState } from 'vuex';
 import ProductApi from "@/Service/product_api";
+import { URL_BACKEND } from "@/variable_enviroment";
 export default {
   components: {
     Header,
@@ -100,19 +74,22 @@ export default {
   data(){
      return{
       product_other:[],
-      HostUrl: "http://localhost:1337"
+      product_suggest : []
      }
   },
   computed:{
      ...mapState(['ProductOther'])
   },
  async created(){
-   const reponse = await ProductApi.GetAllProductApi(`http://localhost:1337/api/products?populate=product_image&pagination[pageSize]=50`);
+   const reponse = await ProductApi.GetAllProductApi(`${URL_BACKEND}/api/products?populate=*`);
    
    for(var i = 0; i < reponse.data.data.length; i++){
     if(reponse.data.data[i].attributes.product_zone == "ProductOther"){
       this.product_other.push(reponse.data.data[i]);
     }
+     if (reponse.data.data[i].attributes.product_zone == "ProductSuggest") {
+        this.product_suggest.push(reponse.data.data[i]);
+      }
    };
    console.log(this.product_other);
   },
