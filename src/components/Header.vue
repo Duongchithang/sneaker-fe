@@ -324,8 +324,10 @@ export default {
    },
   async HandleImageLoginUser(){
       const userData = JSON.parse(localStorage.getItem('userData'));
-      const user = await this.FindUser(userData.id);
-      this.Avartar = user.data.avartar.url;
+      if(userData){
+           const user = await this.FindUser(userData.id);
+             this.Avartar = user.data.avartar.url;
+      }
    },
    ChooseOptions(value){
      if(value == "Đăng xuất"){

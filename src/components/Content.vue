@@ -411,7 +411,7 @@ export default {
         ? this.product_discount.push(reponse.data.data[i].attributes)
         : null;
     }
-  console.log(this.image);
+  console.log(this.ImageBanner);
   },
   methods: {
     ...mapMutations(["AddProduct"]),
