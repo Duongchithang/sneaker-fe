@@ -287,11 +287,11 @@
           >
            <div class="row">
              <div
-                class="col-3 shoes-item relative mt-3"
+                class="col-12 col-md-6 col-lg-3  shoes-item relative mt-3"
                 v-for="product in product_discount"
                 :key="product"
               >
-                <div class="shoes-item-img xs:w-[300px]">
+                <div class="shoes-item-img xs:w-[100%]">
                   <img
                   style="width: 100%;"
                     :src="`${product.product_image.data.attributes.formats.thumbnail.url}`"

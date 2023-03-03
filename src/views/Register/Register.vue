@@ -7,17 +7,17 @@
             <div class="around-input-list">
                 <div class="feild-input">
                     <label for="username">Username </label>
-                    <input v-model="CheckInputSuccess.Username" id="username" type="text" placeholder="Email">
+                    <input class="block w-full p-4 text-lg rounded-sm bg-white" v-model="CheckInputSuccess.Username" id="username" type="text" placeholder="Email">
                     <span class="CheckValidate">{{CheckInputError.Username}}</span>
                 </div>
                 <div class="feild-input">
                     <label for="password">Password</label>
-                    <input v-model="CheckInputSuccess.Password" id="password" type="password" placeholder="Password">
+                    <input class="block w-full p-4 text-lg rounded-sm bg-white" v-model="CheckInputSuccess.Password" id="password" type="password" placeholder="Password">
                     <span class="CheckValidate">{{CheckInputError.Password}}</span>
                 </div>
                 <div class="feild-input">
                     <label for="confirm-password">Confirm Password</label>
-                    <input v-model="CheckInputSuccess.ConfirmPassword" id="confirm-password" type="password" placeholder="Confirm password">
+                    <input class="block w-full p-4 text-lg rounded-sm bg-white" v-model="CheckInputSuccess.ConfirmPassword" id="confirm-password" type="password" placeholder="Confirm password">
                     <span class="CheckValidate">{{CheckInputError.ConfirmPassword}}</span>
                 </div>
             </div>

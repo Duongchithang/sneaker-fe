@@ -12,27 +12,27 @@
                 <h1 class="text-left mt-[30px] mb-[30px] font-semibold">BÀI VIẾT MỚI</h1>
                 <ul class="list-news xs:w-full lg:w-[290px] flex flex-col px-[15px] py-[15px] bg-[#FCFCFC]">
                     <li class="flex pb-[10px]">
-                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[0].attributes.blog_image.data.attributes.url" alt="">
+                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[0]" alt="">
                         <span class="text-[14px] text-left flex-wrap">
 Converse sẽ mang Golf le Fleur* Chuck 70 về Việt...</span>
                     </li>
                     <li class="flex pb-[10px]">
-                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[1].attributes.blog_image.data.attributes.url" alt="">
+                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[1]" alt="">
                         <span class="text-[14px] text-left flex-wrap">
 Comme des Garçons Play x Converse nhá hàng mẫu...</span>
                     </li>
                     <li class="flex pb-[10px]">
-                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[2].attributes.blog_image.data.attributes.url" alt="">
+                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[2]" alt="">
                         <span class="text-[14px] text-left flex-wrap">
 Xinh xắn nhất những ngày này là những mẫu giày của...</span>
                     </li>
                     <li class="flex pb-[10px]">
-                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[3].attributes.blog_image.data.attributes.url" alt="">
+                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[3]" alt="">
                         <span class="text-[14px] text-left flex-wrap">
 Fashionista Việt đua nhau sống “ngược” theo trào lư...</span>
                     </li>
                     <li class="flex pb-[10px]">
-                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[4].attributes.blog_image.data.attributes.url" alt="">
+                        <img class="w-[50px] h-[50px] object-cover rounded-full mr-2" :src="blog_image_data[4]" alt="">
                         <span class="text-[14px] text-left flex-wrap">
 Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của nhóc tì m...</span>
                     </li>
@@ -42,7 +42,7 @@ Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của n
                 <div class="around-list-news grid xs:grid-cols-1 xs:grid-rows-6 xs:gap-y-[50px] lg:grid-cols-3 lg:gap-y-[20px] lg:gap-x-[20px] lg:grid-rows-2">
                     <div @click="NavigateToBlogDetail(1)" class="around-items-news flex flex-col px-[5px] pb-[10px] relative">
                         <div class="container-img-news">
-                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[0].attributes.blog_image.data.attributes.url" alt="">
+                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[0]" alt="">
                         </div>
                         <span class="text-left font-semibold text-[16px] xs:mt-[10px] lg:mt-0">Converse sẽ mang Golf le Fleur* Chuck 70 về Việt Nam?</span>
                         <span class="w-[50px] mt-2 h-[2px] bg-gray"></span>
@@ -54,7 +54,7 @@ Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của n
                     </div>
                      <div @click="NavigateToBlogDetail(2)" class="around-items-news flex flex-col px-[5px] pb-[10px] relative">
                         <div class="container-img-news">
-                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[1].attributes.blog_image.data.attributes.url" alt="">
+                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[1]" alt="">
                         </div>
                         <span class="text-left font-semibold text-[16px] xs:mt-[15px] lg:mt-0">Xinh xắn nhất những ngày này là những mẫu giày của các...</span>
                         <span class="w-[50px] mt-2 h-[2px] bg-gray"></span>
@@ -66,7 +66,7 @@ Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của n
                     </div>
                      <div @click="NavigateToBlogDetail(3)" class="around-items-news flex flex-col px-[5px] pb-[10px] relative">
                         <div class="container-img-news">
-                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[2].attributes.blog_image.data.attributes.url" alt="">
+                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[2]" alt="">
                         </div>
                         <span class="text-left font-semibold text-[16px] xs:mt-[15px] lg:mt-0">Fashionista Việt đua nhau sống "ngược theo trào lưu"</span>
                         <span class="w-[50px] mt-2 h-[2px] bg-gray"></span>
@@ -78,7 +78,7 @@ Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của n
                     </div>
                      <div @click="NavigateToBlogDetail(4)" class="around-items-news flex flex-col px-[5px] pb-[10px] relative">
                         <div class="container-img-news">
-                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[3].attributes.blog_image.data.attributes.url" alt="">
+                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[3]" alt="">
                         </div>
                         <span class="text-left font-semibold text-[16px] xs:mt-[15px] lg:mt-0">Comme des Garcon Play x Converse nhá hàng mẫu giày...</span>
                         <span class="w-[50px] mt-2 h-[2px] bg-gray"></span>
@@ -90,7 +90,7 @@ Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của n
                     </div>
                      <div @click="NavigateToBlogDetail(5)" class="around-items-news flex flex-col px-[5px] pb-[10px] relative">
                         <div class="container-img-news">
-                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[4].attributes.blog_image.data.attributes.url" alt="">
+                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[4]" alt="">
                         </div>
                         <span class="text-left font-semibold text-[16px] xs:mt-[15px] lg:mt-0">Hội thần kinh giày xôn xao với hình ảnh 18 ngàn lượt like của...</span>
                         <span class="w-[50px] mt-2 h-[2px] bg-gray"></span>
@@ -102,7 +102,7 @@ Hội Thần Kinh Giày xôn xao với hình ảnh 18 ngàn lượt like của n
                     </div>
                      <div class="around-items-news flex flex-col px-[5px] pb-[10px] relative">
                         <div class="container-img-news">
-                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[5].attributes.blog_image.data.attributes.url" alt="">
+                            <img class="xs:h-[350px] lg:h-[150px] w-full object-cover mt-1" :src="blog_image_data[5]" alt="">
                         </div>
                         <span class="text-left font-semibold text-[16px] xs:mt-[15px] lg:mt-0">Đế giày Converse có thiết kế rất đặc biệt, nhưng lí do thì chắc...</span>
                         <span class="w-[50px] mt-2 h-[2px] bg-gray"></span>
@@ -153,9 +153,10 @@ export default {
   async created(){
       const image_blog = await axios.get(`${URL_BACKEND}/api/blogs?populate=*`);
        for(var i = 0; i < image_blog.data.data.length ; i++){
-        this.blog_image_data.push(image_blog.data.data[i]);
+        this.blog_image_data.push(image_blog.data.data[i].attributes.blog_image.data.attributes.url);
        }
        console.log(this.blog_image_data);
+      
    },
    methods:{
     CallApiBlogDetail(blog_id){

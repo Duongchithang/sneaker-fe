@@ -39,11 +39,11 @@
                     <div class="pb-2 pt-4">
                         <input v-model="CheckInput.InputUsername" type="text" name="text" id="username" placeholder="Username" class="block w-full p-4 text-lg rounded-sm bg-black">
                     </div>
-                    <span class="text-error text-left">{{Error.InputUsername}}</span>
+                    <span class="error text-left">{{Error.InputUsername}}</span>
                     <div class="pb-2 pt-4">
                         <input v-model="CheckInput.InputPassword" class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="password" id="password" placeholder="Password">
                     </div>
-                    <span class="text-error text-left">{{Error.InputPassword}}</span>
+                    <span class="error text-left">{{Error.InputPassword}}</span>
                     <div class="text-right text-gray-400 cursor-pointer hover:text-gray-100 mt-[20px] flex justify-between">
                         <span @click="RegisterAccount">Register account now !</span>
                         <span>Forgot your password?</span>
@@ -159,5 +159,22 @@ export default {
 </script>
 
 <style scoped>
-  @import './Login.css'
+.form-input input{
+    outline: none;
+    border: none;
+}
+.success{
+  color:green;
+}
+.error{
+  display: block;
+  color: red;
+}
+.Sign-in{
+width: 130px;
+font-weight: 500;
+box-shadow: 0px 1px 3px 2px rgb(228, 54, 54);
+height: 50px;
+background: rgb(194, 16, 16);
+}
 </style>
